@@ -1,5 +1,8 @@
 TECNO CAMON C7
 ==============
+```
+By : Nana Iyke Quame
+```
 
 The tecno Camon C7 (codenamed _"Camon_C7"_) is a flagship smartphone from tecno.
 
