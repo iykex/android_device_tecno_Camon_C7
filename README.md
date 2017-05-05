@@ -41,9 +41,11 @@ git clone https://github.com/DarkWoodens/android_device_tecno_Camon_C7-general.g
 
   adjust -j value if you are working on your machine same time
   # Example : 
-  *mka bacon -j5 
-      or 
-   brunch Camon_C7
+  _mka bacon -j5_
+  
+      or
+      
+   _brunch Camon_C7_
 
  5.  It will take time to compile your build
  6. Find your build in $out directory
