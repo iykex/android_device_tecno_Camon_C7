@@ -40,12 +40,16 @@ git clone https://github.com/DarkWoodens/android_device_tecno_Camon_C7-general.g
   means n= no of CPU/Core + 1
 
   adjust -j value if you are working on your machine same time
-  # Example : 
-  _mka bacon -j5_
+  # Example :
+  ```
+  _mka bacon -j5_     [ this for AOSP ]
+  ```
   
       or
       
-   _brunch Camon_C7_
+  ```   
+   _brunch Camon_C7_    [ this for LOS ]
+  ```
 
  5.  It will take time to compile your build
  6. Find your build in $out directory
