@@ -1,7 +1,7 @@
 TECNO CAMON C7
 ==============
 
-The tecno Camon C7 (codenamed _"tecno_Camon_C7"_) is a flagship smartphone from tecno.
+The tecno Camon C7 (codenamed _"Camon_C7"_) is a flagship smartphone from tecno.
 
 This LineageOS 14.1 Device tree for TECNO CAMON C7
 
@@ -15,7 +15,7 @@ Memory       | 2GB RAM
 Shipped Android Version | 6.0
 Storage      | 16GB
 Battery      | 2500 mAh
-Display      | 5.0 | 13MP
+Display      | 5.0 
 Front Camera | 13MP
 
 
@@ -40,7 +40,10 @@ git clone https://github.com/DarkWoodens/android_device_tecno_Camon_C7-general.g
   means n= no of CPU/Core + 1
 
   adjust -j value if you are working on your machine same time
-  # Example : mka bacon -j5 / brunch Camon_C7
+  # Example : 
+  *mka bacon -j5 
+      or 
+   brunch Camon_C7
 
  5.  It will take time to compile your build
  6. Find your build in $out directory
