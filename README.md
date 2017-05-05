@@ -29,10 +29,10 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 
 # How To Compile
 
-1. Download both device tree and vendor tree and extract them to device/tecno/tecno_Camon_C7 and vendor/tecno/tecno_Camon_C7 respectivly.
+1. Download both device tree and vendor tree and extract them to device/tecno/Camon_C7 and vendor/tecno/Camon_C7 respectivly.
   or cd to your working directory
   And Execute That :
-git clone https://github.com/DarkWoodens/android_device_tecno_Camon_C7-general.git -b master  device/tecno/Camon_C7 && git clone https://github.com/DarkWoodens/android_vendor_tecno_Camon_C7-general.git -b master vendor/tecno/Camon_C7 && ./device/tecno/Camon_C7/patches/install.sh
+git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7 && git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 && ./device/tecno/Camon_C7/patches/install.sh
 
  2. . build/envsetup.sh
  3. lunch
@@ -58,4 +58,6 @@ git clone https://github.com/DarkWoodens/android_device_tecno_Camon_C7-general.g
  6. Find your build in $out directory
  7. Enjoy
 
+---------------
 
+*line :1 - copied from DarkWooden's readme.txt
