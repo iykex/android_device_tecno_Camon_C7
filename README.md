@@ -3,6 +3,7 @@ TECNO CAMON C7
 ```
 By : Nana Iyke Quame
 ```
+![CAMON C7](http://i2.wp.com/mobilityarena.com/wp-content/uploads/2016/07/TECNO-Camon-C7-elegant-blue.jpg?resize=600%2C350)
 
 The tecno Camon C7 (codenamed _"Camon_C7"_) is a flagship smartphone from tecno.
 
