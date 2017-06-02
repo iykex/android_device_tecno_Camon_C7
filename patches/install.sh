@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 echo $1
 rootdirectory="$PWD"
 # ---------------------------------
