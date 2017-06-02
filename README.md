@@ -33,8 +33,17 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 1. Download both device tree and vendor tree and extract them to device/tecno/Camon_C7 and vendor/tecno/Camon_C7 respectivly.
   or cd to your working directory
   And Execute That :
-git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7 && git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 && ./device/tecno/Camon_C7/patches/install.sh
-
+  
+```
+git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7
+```
+```
+git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 
+```
+```
+./device/tecno/Camon_C7/patches/install.sh
+```
+```
  2. . build/envsetup.sh
  3. lunch
   and select your device from menu [select lineage_Camon_C7-userdebug]
@@ -42,7 +51,7 @@ git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b mast
  4. mka bacon -jn [for AOSP Based] / brunch Camon_C7 [for Lineage Based]
   example if you have 4 cpu then n=5
   means n= no of CPU/Core + 1
-
+```
   adjust -j value if you are working on your machine same time
   # Example :
   ```
