@@ -34,9 +34,30 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 # How To Compile
 
 1. Download both device tree and vendor tree and extract them to device/tecno/Camon_C7 and vendor/tecno/Camon_C7 respectivly.
-  or cd to your working directory
-  And Execute That :
-  
+  or cd to your working directory. To do that, simply create a local_manifest.xml to ```sourcedir/.repo/local_manifests```
+  Note that , by default ``local_manifest``` directory is not available to you must create it yourself.
+  so : 
+  ```
+     $ cd .repo && mkdir local_manifests
+     $ cd local_manifests
+     $ > local_manifest.xml && nano local_manifest.xml
+  ```
+  then copy to paste this in the nano page :
+ ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+     <manifest>
+         <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="master"/>
+
+         <project path="vendor/tecno/Camon_C7" name="iykequame/android_vendor_tecno_Camon_C7" remote="github" revision="master"/>
+
+  </manifest>
+  ```
+  as you use ```ctrl+x``` to save.
+   | now back to sourcedir, then use : ```repo sync --force-sync``` to resync 
+ 
+ 
+  # OR
+
 
 ```
 git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7
