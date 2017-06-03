@@ -66,20 +66,23 @@ git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b mast
 git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 
 ```
 
-# PATCH YOUR MTK WITH
+# TO START BUILD :::
+
+
+# you have to/must patch your MTK to meet boot up requirements :)
 ```
 ./device/tecno/Camon_C7/patches/install.sh
 ```
 
-```
- 2. . build/envsetup.sh
- 3. lunch
-  and select your device from menu [select lineage_Camon_C7-userdebug]
+
+ 2. $ ```. build/envsetup.sh```
+ 3. $ ```lunch```
+  and select your device from menu [select ```lineage_Camon_C7-userdebug```]
 
  4. mka bacon -jn [for AOSP Based] / brunch Camon_C7 [for Lineage Based]
   example if you have 4 cpu then n=5
   means n= no of CPU/Core + 1
-```
+
   adjust -j value if you are working on your machine same time
   # Example :
   ```
