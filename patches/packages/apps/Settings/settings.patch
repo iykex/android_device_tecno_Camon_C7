@@ -28,7 +28,7 @@ index 3e93d41..a352391 100644
      <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
      <string name="security_patch">Android security patch level</string>
 +    <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
-+    <string name="author_info">Build author</string>
++    <string name="author_info">Build Aut.</string>
      <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
      <string name="model_info">Model</string>
      <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
@@ -59,10 +59,10 @@ index cba4865..c7f5fa3 100644
      private static final String KEY_BASEBAND_VERSION = "baseband_version";
      private static final String KEY_FIRMWARE_VERSION = "firmware_version";
      private static final String KEY_SECURITY_PATCH = "security_patch";
-+    private static final String KEY_AUTHOR_INFO = "author_info";
      private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
      private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
      private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
++    private static final String KEY_AUTHOR_INFO = "author_info";
 @@ -141,6 +142,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
          setExplicitValueSummary(KEY_MOD_API_LEVEL, constructApiLevelString());
          findPreference(KEY_MOD_API_LEVEL).setEnabled(true);
