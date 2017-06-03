@@ -13,5 +13,4 @@ MTK_K64_SUPPORT := yes
 
 
 #PreBuilt Kernel
-
-TARGET_PREBUILT_KERNEL=device/tecno/Camon_C7/prebuilt/kernel
+TARGET_PREBUILT_KERNEL=device/tecno/Camon_C7/kernel
