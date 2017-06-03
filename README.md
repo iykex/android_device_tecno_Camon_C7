@@ -66,7 +66,8 @@ git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b mast
 git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 
 ```
 
-``` # PATCH YOUR MTK WITH
+# PATCH YOUR MTK WITH
+```
 ./device/tecno/Camon_C7/patches/install.sh
 ```
 
@@ -84,12 +85,7 @@ git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b mast
   ```
   _mka bacon -j5_     [ this for AOSP ]
   ```
-
-      or
-
-  ```
-  
-      or
+   # OR 
       
   ```   
    _brunch Camon_C7_    [ this for LOS ]
@@ -101,4 +97,3 @@ git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b mast
 
 ---------------
 
-*line :1 - copied from DarkWooden's readme.txt
