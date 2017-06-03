@@ -70,7 +70,7 @@ ro.mtk_gps_support=1
 persist.md.perm.checked=1
 
 ro.mediatek.chip_ver=S01
-ro.mediatek.version.release=C7-H355A1-M-160705V9
+ro.mediatek.version.release=C7-Hi.O.S-Remix // #HiOS_v1.6.2--CUSTOM
 ro.mediatek.platform=MT6735
 bgw.current3gband=0
 ro.sf.hwrotation=0
@@ -80,5 +80,23 @@ wfd.dummy.enable=1
 persist.sys.display.clearMotion=1
 ro.mtk_clearmotion_support=1
 keyguard.no_require_sim=true
-#camera.disable_zsl_mode=1
+camera.disable_zsl_mode=1
 persist.debug.wfd.enable=1
+mediatek.wlan.chip=CONSYS_MT6735
+mediatek.wlan.module.postfix=_consys_mt6735
+
+#for_Camon_C7
+ro.rlk_front_flash_show_support=1
+ro.rlk_nightmode_support=1
+ro.rlk_camera_flash_lowbattery=1
+ro.rlk_multi_touch_support=1
+ro.rlk_multi_gsensor_support=1
+ro.rlk_quickcapture_support=1
+ro.rlk_burstpmk_support=1
+ro.rlk_wideselfie_support=1
+rlk.eyeverify.enable=1
+com.rlk.eyeverify.zoom=0
+com.rlk.eyeverify.zsd=off
+ro.mtk_dual_mic_support=0
+ro.have_aee_feature=1
+ro.mtk_emmc_support=1

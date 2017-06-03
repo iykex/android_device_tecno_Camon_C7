@@ -16,7 +16,11 @@
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
+<<<<<<< HEAD
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
+=======
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+>>>>>>> c68f509c98f5ba68b12c9cc3273ed0aff82f0018
 PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi 320dpi hdpi tvdpi mdpi ldpi
 
 # Device specific overlays
@@ -28,10 +32,17 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 include $(LOCAL_PATH)/product/*.mk
 
 # Dalvik heap configurations
+<<<<<<< HEAD
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 # Call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-hwui-memory.mk)
+=======
+$(call inherit-product-if-exists, frameworks/native/build/phone-hdpi-3072-dalvik-heap.mk)
+
+# Call hwui memory config
+$(call inherit-product-if-exists, frameworks/native/build/phone-hdpi-3072-hwui-memory.mk)
+>>>>>>> c68f509c98f5ba68b12c9cc3273ed0aff82f0018
 
 # Product common configurations
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
