@@ -29,9 +29,6 @@ include $(LOCAL_PATH)/board/*.mk
 TARGET_KMODULES := true
 BOARD_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
-# Prebuilt Kernel
-# TARGET_PREBUILT_KERNEL := device/tecno/Camon_C7/prebuilt/kernel
-
 # Disable memcpy opt (for audio libraries)
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
@@ -52,6 +49,9 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 # Block based ota
 # see http://review.cyanogenmod.org/#/c/78849/1/core/Makefile
 BLOCK_BASED_OTA := false
+
+# DISABLED BUILD NINJA
+USE_NINJA := false
 
 # KERNEL OBJ
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
