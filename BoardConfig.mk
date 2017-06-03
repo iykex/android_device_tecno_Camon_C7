@@ -51,7 +51,7 @@ TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 BLOCK_BASED_OTA := false
 
 # DISABLED BUILD NINJA
-USE_NINJA := false
+#USE_NINJA := false
 
 # KERNEL OBJ
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
