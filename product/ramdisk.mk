@@ -13,5 +13,15 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/meta_init.modem.rc:root/meta_init.modem.rc \
     $(LOCAL_PATH)/rootdir/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/rootdir/meta_init.rc:root/meta_init.rc \
+    $(LOCAL_PATH)/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
+    $(LOCAL_PATH)/rootdir/init.aee.rc:root/init.aee.rc \
+    $(LOCAL_PATH)/rootdir/init.ssd.rc:root/init.ssd.rc \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/init.usb.configfs.rc:root/init.usb.configfs.rc \
+    $(LOCAL_PATH)/rootdir/init.usb.rc:root/init.usb.rc \
+    $(LOCAL_PATH)/rootdir/init.xlog.rc:root/init.xlog.rc \
+    $(LOCAL_PATH)/rootdir/init.zygote32.rc:root/init.zygote32.rc \
     $(LOCAL_PATH)/rootdir/ueventd.mt6735.rc:root/ueventd.mt6735.rc \
     $(LOCAL_PATH)/rootdir/init/mediaserver.rc:system/etc/init/mediaserver.rc
+
+

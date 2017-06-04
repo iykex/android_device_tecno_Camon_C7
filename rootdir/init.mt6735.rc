@@ -4,6 +4,9 @@ import init.project.rc
 import /FWUpgradeInit.rc
 import init.xlog.rc
 import init.aee.rc
+import init.ssd.rc
+import init.no_ssd.rc
+import init.ssd_nomuser.rc
 import init.fon.rc
 import init.volte.rc
 import init.mal.rc
@@ -22,13 +25,16 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
+    export LD_PRELOAD "libmtk_symbols.so"
+    export USBOTG_STORAGE /storage/usbotg
+    mount tmpfs tmpfs /mnt/media_rw/ mode=0755,uid=1000,gid=1000
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+    mount tmpfs tmpfs /storage/usbotg mode=0755,uid=1000,gid=1000
+    chmod 0666 /dev/kmsg
 
-    # if primary storage is physical, set ro.vold.primary_physical to 1
-    # setprop ro.vold.primary_physical 1
-
-# Temp Backward compatibility
+	
+# Temp Backward  compatibility
     mkdir /protect_f 0771 system system
     mkdir /protect_s 0771 system system
     #create mountpoint for persist partition
@@ -40,32 +46,17 @@ on init
 
     mkdir /mnt/cd-rom 0000 system system
 
+# Change ION driver permission [+] Decker
+    chmod 0777 /dev/ion
+
 # change lk_env permission
     chown root system /proc/lk_env
     chmod 0660 /proc/lk_env
 
-    chmod 0666 /dev/kmsg
-
-# increase sysctl_rmem_max and sysctl_wmem_max values to 2M
-    write /proc/sys/net/core/wmem_max 2097152
-    write /proc/sys/net/core/rmem_max 2097152
-
 # mount different fs start
-
-on property:persist.mediatek.fg.disable=1
-    write /sys/devices/platform/battery_meter/FG_daemon_disable 1
-
-
-on property:persist.mediatek.fg.log.enable=1
-		chmod 0666 /dev/kmsg
-    write /sys/devices/platform/battery_meter/FG_daemon_log_level 7
-    write /proc/sys/kernel/printk 8
 
 on charger
     mount ext4 /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/system /system ro wait
-		chmod 0666 /dev/kmsg
-		write /sys/devices/platform/battery_meter/FG_daemon_log_level 7
-    start fuelgauged
     start kpoc_charger
     start servicemanager
 
@@ -80,9 +71,8 @@ on fs
    mount iso9660 loop@/system/etc/iAmCdRom.iso /mnt/cd-rom ro
 
 on post-fs
-    # Support legacy paths
-    symlink /sdcard /storage/sdcard0
-
+    chmod 0660 /dev/block/platform/mtk-msdc.0/by-name/nvram
+    chown root system /dev/block/platform/mtk-msdc.0/by-name/nvram
     #change permissions for mediaserver
     chown root media /proc/clkmgr/mipi_test
 
@@ -98,6 +88,18 @@ on post-fs
     chown radio system /proc/freqhopping/status
     chown radio system /proc/freqhopping/userdef
 
+#Gionee luliya 20160704 add for CTP begin 
+    chown system system /sys/bus/platform/devices/tp_wake_switch/double_wake
+    chown radio system /sys/bus/platform/devices/tp_wake_switch/factory_check
+    chown system system /sys/bus/platform/devices/tp_wake_switch/factory_check_value
+    chown system system /sys/bus/platform/devices/tp_wake_switch/glove_enable
+#Gionee luliya 20160704 add for CTP end 
+
+#Gionee luliya 20160711 add for hall key begin
+    chmod 0664 /sys/devices/platform/gn_hall_key/state
+    chown system system /sys/devices/platform/gn_hall_key/state
+#Gionee luliya 20160711 add for hall key end
+
 # change owner
     chown system system /proc/bootprof
     chown root system /proc/mtprof/cputime
@@ -108,6 +110,9 @@ on post-fs
 
     chown system system /protect_s
     chmod 0770 /protect_s
+
+    chown system system /system/bin/sbchk
+    chmod 0771 /system/bin/sbchk
 
 on post-fs-data
     chown system system /persist
@@ -194,11 +199,11 @@ on post-fs-data
 
     # RTC
     mkdir /data/misc/rtc 0770 system system
-	#Gionee huping 20160513 modify for CR01694612 begin
+    #Gionee huping 20160513 modify for CR01694612 begin
     mkdir /data/misc/srs 0770 system system
     chmod 0666 /data/misc/srs/srs_processing.cfg
     chown system system /data/misc/srs/srs_processing.cfg
-	#Gionee huping 20160513 modify for CR01694612 end
+    #Gionee huping 20160513 modify for CR01694612 end
 
     # M4U
     #insmod /system/lib/modules/m4u.ko
@@ -290,19 +295,40 @@ on post-fs-data
     chmod 0660 /sys/class/misc/m_alsps_misc/alsdelay
     chmod 0660 /sys/class/misc/m_alsps_misc/alsbatch
     chmod 0660 /sys/class/misc/m_alsps_misc/alsflush
+
+    /*dixiaobing@wind-mobi.com 20150629 start*/
+    chmod 0660 /sys/class/misc/m_alsals_misc/alsactive
+    chmod 0660 /sys/class/misc/m_alsals_misc/alsdelay
+    chmod 0660 /sys/class/misc/m_alsals_misc/alsbatch
+    chmod 0660 /sys/class/misc/m_alsals_misc/alsflush
+    /*dixiaobing@wind-mobi.com 20150629 end*/
     chmod 0660 /sys/class/misc/m_alsps_misc/psactive
     chmod 0660 /sys/class/misc/m_alsps_misc/psdelay
     chmod 0660 /sys/class/misc/m_alsps_misc/psbatch
     chmod 0660 /sys/class/misc/m_alsps_misc/psflush
+    //Gionee BSP tangjh 20160707 modify for call do_psensor_cali start 
+    chmod 0660 /sys/class/misc/m_alsps_misc/handanswer_status
+    chown system system /sys/class/misc/m_alsps_misc/handanswer_status 
+    //Gionee BSP tangjh 20160707 modify for call do_psensor_cali end 
     chown system system /sys/class/misc/m_alsps_misc/alsactive
     chown system system /sys/class/misc/m_alsps_misc/alsdelay
     chown system system /sys/class/misc/m_alsps_misc/alsbatch
     chown system system /sys/class/misc/m_alsps_misc/alsflush
+    
+    /*dixiaobing@wind-mobi.com 20150629 start*/
+    chown system system /sys/class/misc/m_alsals_misc/alsactive
+    chown system system /sys/class/misc/m_alsals_misc/alsdelay
+    chown system system /sys/class/misc/m_alsals_misc/alsbatch
+    chown system system /sys/class/misc/m_alsals_misc/alsflush
+    /*dixiaobing@wind-mobi.com 20150629 end*/
     chown system system /sys/class/misc/m_alsps_misc/psactive
     chown system system /sys/class/misc/m_alsps_misc/psdelay
     chown system system /sys/class/misc/m_alsps_misc/psbatch
     chown system system /sys/class/misc/m_alsps_misc/psflush
-
+    #dixiaobing@wind-mobi.com 20150525 start
+    chown system system /sys/class/misc/m_alsps_misc/nonwakeupps
+    #dixiaobing@wind-mobi.com 20150525 end
+ 
     chmod 0660 /sys/class/misc/m_baro_misc/baroenablenodata
     chmod 0660 /sys/class/misc/m_baro_misc/baroactive
     chmod 0660 /sys/class/misc/m_baro_misc/barodelay
@@ -313,32 +339,20 @@ on post-fs-data
     chown system system /sys/class/misc/m_baro_misc/barodelay
     chown system system /sys/class/misc/m_baro_misc/barobatch
     chown system system /sys/class/misc/m_baro_misc/baroflush
-#Gionee lizhi20160328 add for akm daemon to rw pdc.txt start
-    chmod 0664 /system/vendor/etc/pdc.txt
-    chown root system /system/vendor/etc/pdc.txt                                                                                                                                                   
-#Gionee lizhi20160328 add for msensor daemon to rw pdc.txt end	
-#gionee lizhi 20160513 add for hall key begin
-    chmod 0664 /sys/devices/platform/gn_hall_key/state
-    chown system system /sys/devices/platform/gn_hall_key/state
-#gionee lizhi 20160513 add for hall key end
 
-#Gionee huping 20150511 add for tp cts test start
-     chown system system /sys/devices/platform/tp_wake_switch/double_wake
-     chmod 0664 /sys/devices/platform/tp_wake_switch/double_wake
-     chown system system /sys/devices/platform/tp_wake_switch/glove_enable
-     chmod 0664 /sys/devices/platform/tp_wake_switch/glove_enable
-     chown system system /sys/devices/platform/tp_wake_switch/get_rawdata
-     chmod 0664 /sys/devices/platform/tp_wake_switch/get_rawdata
-     chown system system /sys/devices/platform/tp_wake_switch/rawdata_range
-     chmod 0664 /sys/devices/platform/tp_wake_switch/rawdata_range
+    /*Gionee BSP tanjian  20160201 add for pick_up_sensor start*/
+    chmod 0660 /sys/class/misc/m_pkup_misc/pkupenablenodata
+    chmod 0660 /sys/class/misc/m_pkup_misc/pkupactive
+    chmod 0660 /sys/class/misc/m_pkup_misc/pkupdelay
+    chmod 0660 /sys/class/misc/m_pkup_misc/pkupbatch
+    chmod 0660 /sys/class/misc/m_pkup_misc/pkupflush
+    chown system system /sys/class/misc/m_pkup_misc/pkupenablenodata
+    chown system system /sys/class/misc/m_pkup_misc/pkupactive
+    chown system system /sys/class/misc/m_pkup_misc/pkupdelay
+    chown system system /sys/class/misc/m_pkup_misc/pkupbatch
+    chown system system /sys/class/misc/m_pkup_misc/pkupflush
+    /*Gionee BSP tanjian  20160201 add for pick_up_sensor end*/
 
-     #chown system system /sys/devices/platform/tp_wake_switch/debug
-     #chmod 0664 /sys/devices/platform/tp_wake_switch/debug
-     chown system system /sys/devices/platform/tp_wake_switch/factory_check
-     chmod 0664 /sys/devices/platform/tp_wake_switch/factory_check
-     chown system system /sys/devices/platform/tp_wake_switch/factory_check_value
-     chmod 0664 /sys/devices/platform/tp_wake_switch/factory_check_value
-#Gionee huping 20150511 add for tp cts test start
 
     #Accdet
     chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
@@ -483,6 +497,10 @@ on post-fs-data
     chmod 0440 /dev/devmap
     chown root system /dev/devmap
 
+    # BT relayer mode used VCOM
+    chown bluetooth radio /dev/ttyGS2
+    chmod 0660 /dev/ttyGS2
+
     # bluetooth
     mkdir /data/@btmtk 0770 bluetooth net_bt
     chown bluetooth bluetooth /data/@btmtk/host_cache
@@ -521,11 +539,18 @@ on post-fs-data
     chmod 0660 /dev/kd_camera_flashlight
     chmod 0660 /dev/kd_camera_hw_bus2
     chmod 0660 /dev/FM50AF
-    chmod 0660 /dev/OFILM_CAM_CAL_DRV
-	#Gionee <malp> <2016-02-26> modify for CR01641811 begin 
- 	chmod 0666 /sys/class/flashlightdrv/kd_camera_flashlight/torch
-    #Gionee <malp> <2016-02-26> modify for CR01641811 end
- 
+	#liukun@wind-mobi.com 20150616 begin
+    chmod 0660 /dev/BU6429AF
+	chmod 0660 /dev/BU6429116109AF
+	chmod 0660 /dev/BU6429116134AF
+	#liukun@wind-mobi.com 20150616 end
+    chmod 0660 /dev/CAM_CAL_DRV
+	#Gionee malp add begin
+	 chmod 0660 /dev/OFILM_CAM_CAL_DRV
+	 #Gionee malp add end
+#pangfei add for torch start
+    chmod 0666 /sys/class/flashlightdrv/kd_camera_flashlight/torch
+#pangfei add for torch end
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
     chown system camera /dev/camera-fdvt
@@ -534,8 +559,10 @@ on post-fs-data
     chown system camera /dev/kd_camera_flashlight
     chown system camera /dev/kd_camera_hw_bus2
     chown system camera /dev/FM50AF
+    chown system camera /dev/CAM_CAL_DRV
+	#Gionee malp add begin
     chown system camera /dev/OFILM_CAM_CAL_DRV
-
+	#Gionee malp add end
     #MATV
     chmod 0660 /dev/MATV
     chown system media /dev/MATV
@@ -596,6 +623,18 @@ on post-fs-data
     chmod 0660 /proc/driver/otp
     chown root system /proc/driver/otp
 
+    #autok
+    chown root system /sys/autok/debug
+    chown root system /sys/autok/param_count
+    chown root system /sys/autok/ready
+    chown root system /sys/autok/ss_corner
+    chown root system /sys/autok/suggest_vol
+    chown root system /sys/autok/stage1/2/DONE
+    chown root system /sys/autok/stage1/2/PARAMS
+    chown root system /sys/autok/stage1/2/VOLTAGE
+    chown root system /sys/autok/stage1/2/LOG
+    chown root system /sys/autok/stage2/2
+
     #sn
     chmod 0664 /sys/class/android_usb/android0/iSerial
     chown root system /sys/class/android_usb/android0/iSerial
@@ -606,8 +645,8 @@ on post-fs-data
     chown system system /proc/secmem0
 
     # mcDriverDaemon
-    mkdir /data/app/mcRegistry 0775 system system
-    mkdir /data/app/mcRegistry/TbStorage 0775 system system
+    mkdir /data/app/mcRegistry 0770 system system
+    mkdir /data/app/mcRegistry/TbStorage 0770 system system
 
     # AGPS
     mkdir /data/agps_supl 0771 gps system
@@ -616,19 +655,9 @@ on post-fs-data
     exec /system/bin/rm -f /cache/.ipoh.img
     
     chmod 0666 /dev/exm0
-	
-	#Thermal	
-	mkdir /data/.tp/ 0775 system system 
-	
-    #create directory /data/subt for subtitle
-    mkdir /mnt/subt/ 0770 media media
+
 # End of adding by MTK drivers
 # -----------------------
-#Gionee futao 20160411 modify for CR01663888 begin 
-    mkdir /cache/keepdata 0770 system system
-    chown system system /cache/keepdata
-    chmod 0770 /cache/keepdata
-#Gionee futao 20160411 modify for CR01663888 end 
 
 on boot
 
@@ -657,6 +686,7 @@ on boot
     chown system system /sys/class/leds/red/trigger
     chown system system /sys/class/leds/green/trigger
     chown system system /sys/class/leds/blue/trigger
+
 #Gionee lizhi 20160616 add for CR01701884 begin
     chown system system /sys/class/leds/red/delay_off
     chown system system /sys/class/leds/red/delay_on
@@ -675,7 +705,6 @@ on boot
     chown system system /sys/class/leds/amoled_lcm_partical/brightness
     chmod 0664 /sys/class/leds/amoled_lcm_partical/brightness
     #Gionee lisheng add for GN_LCD_ACL support end
-
 
     # Permission for hibernation
     chown radio system /sys/power/tuxonice
@@ -705,11 +734,7 @@ on boot
     chmod 0660 /proc/cpufreq/cpufreq_limited_by_hevc
     chown system system /proc/cpufreq/cpufreq_limited_max_freq_by_user
     chmod 0660 /proc/cpufreq/cpufreq_limited_max_freq_by_user
-
-# BW monitor
-    chown system system /proc/fliper
-    chmod 0664 /proc/fliper
-
+    
 ##Netlog tool
    #change permissions about terminal
     chown root radio /proc/net/vlan/config
@@ -738,31 +763,22 @@ on boot
     chown system radio /dev/ttyGS3
     chmod 0660 /dev/ttyGS3
 
+#Gionee zhangliu  20160615 @ add for smart pa chmod
+    chmod 0666 /dev/i2c-3
+
 #Define device for ATCID
     chmod 660 /dev/ttyGS0
     chown system /dev/ttyGS0
     chmod 660 /dev/ttyGS1
     chown system /dev/ttyGS1
-
-
-# BT relayer mode USB VCOM
-    chown bluetooth radio /dev/ttyGS2
-    chmod 0660 /dev/ttyGS2
+#yangjiajun@wind-mobi.com 2015-7-27 begin
+    setprop ro.meizu.hardware.psn ${ro.boot.psn}
+#yangjiajun@wind-mobi.com 2015-7-27 end
 
 on property:ro.board.platform=mt6753
     chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1300000
-
-on property:ro.board.platform=mt6737t
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1300000
-
-on property:ro.board.platform=mt6737m
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 988000
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1300000 
 
 on property:vold.decrypt=trigger_reset_main
     start stop_modem
@@ -772,7 +788,6 @@ on property:vold.decrypt=trigger_restart_min_framework
     start start_modem
     start msensord
     start permission_check
-    start stp_dump
     write /proc/bootprof "trigger_restart_min_framework"
 
 on property:vold.decrypt=trigger_restart_framework
@@ -785,7 +800,6 @@ on property:vold.decrypt=trigger_restart_framework
 on property:vold.decrypt=trigger_shutdown_framework
     start stop_modem
     start swapoff_action
-    stop stp_dump
     write /proc/bootprof "trigger_shutdown_framework"
 
 service stop_modem /system/bin/md_ctrl 0
@@ -821,22 +835,16 @@ service bootlogoupdater /system/bin/boot_logo_updater
     class core
     oneshot
 
-	#Gionee huping 20160513 modify for CR01694612 begin
+#Gionee huping 20160513 modify for CR01694612 begin
 service srs_update /system/bin/sh /system/data/srs_cfg_update.sh
     class late_start
     user root
     group root
     oneshot
     seclabel u:r:srs_update:s0
-	#Gionee huping 20160513 modify for CR01694612 end
+#Gionee huping 20160513 modify for CR01694612 end
 service mobile_log_d /system/bin/mobile_log_d
     class main
-# MTK PR_DEBUG SWITCH
-on property:debug.MB.prdebug=1
-    write /sys/kernel/debug/dynamic_debug/control "file *mediatek* +p"
-    write /sys/kernel/debug/dynamic_debug/control "file *gpu* -p"
-on property:debug.MB.prdebug=0
-    write /sys/kernel/debug/dynamic_debug/control "file *mediatek* -p"
 
 service met_log_d /system/bin/met_log_d
     class main
@@ -871,6 +879,7 @@ service gas_srv /system/bin/gas_srv
 
 service netdiag /system/bin/netdiag
     class main
+    socket netdiag stream 0664 root inet
 
 
 service nvram_daemon /system/bin/nvram_daemon
@@ -930,6 +939,7 @@ service pq /system/bin/pq
     class main
     user system
     group system graphics
+    oneshot
 
 service aal /system/bin/aal
     class main
@@ -942,6 +952,16 @@ service rbfota /system/bin/fota1
     disabled
     oneshot
 
+#
+# MTK Wi-Fi related services (Begin)
+#
+
+# monitor property and power on/off wlan
+on property:wlan.driver.status=ok
+    write /dev/wmtWifi "1"
+
+on property:wlan.driver.status=unloaded
+    write /dev/wmtWifi "0"
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -970,6 +990,15 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
+# For WiFi High Speed calibration
+service autokd /system/bin/autokd
+    class core
+    user system
+    group system
+
+#
+# MTK Wi-Fi related services (End)
+#
 
 
 service dhcpcd_bt-pan /system/bin/dhcpcd -BK -dd
@@ -1054,35 +1083,27 @@ on property:service.pppoe_wlan0.enable=1
     on property:gsm.sim.ril.testsim=0
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
     write /proc/sys/net/ipv4/tcp_rto_min 200
-    write /proc/sys/net/ipv4/tcp_early_retrans 3
     on property:gsm.sim.ril.testsim=1
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
     write /proc/sys/net/ipv4/tcp_rto_min 400
-    write /proc/sys/net/ipv4/tcp_early_retrans 0
     on property:gsm.sim.ril.testsim.2=0
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
     write /proc/sys/net/ipv4/tcp_rto_min 200
-    write /proc/sys/net/ipv4/tcp_early_retrans 3
     on property:gsm.sim.ril.testsim.2=1
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
     write /proc/sys/net/ipv4/tcp_rto_min 400
-    write /proc/sys/net/ipv4/tcp_early_retrans 0
     on property:gsm.sim.ril.testsim.3=0
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
     write /proc/sys/net/ipv4/tcp_rto_min 200
-    write /proc/sys/net/ipv4/tcp_early_retrans 3
     on property:gsm.sim.ril.testsim.3=1
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
     write /proc/sys/net/ipv4/tcp_rto_min 400
-    write /proc/sys/net/ipv4/tcp_early_retrans 0
     on property:gsm.sim.ril.testsim.4=0
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 0
     write /proc/sys/net/ipv4/tcp_rto_min 200
-    write /proc/sys/net/ipv4/tcp_early_retrans 3
     on property:gsm.sim.ril.testsim.4=1
     write /proc/sys/net/netfilter/nf_conntrack_tcp_no_window_check 1
     write /proc/sys/net/ipv4/tcp_rto_min 400
-    write /proc/sys/net/ipv4/tcp_early_retrans 0
 
 service DMAgent /system/bin/dm_agent_binder
     class main
@@ -1094,6 +1115,14 @@ service PPLAgent /system/bin/ppl_agent
     user system
     group system cache
 
+service vtservice /system/bin/vtservice
+    class main
+    socket soc_vt_tcv dgram 660 radio system
+    socket soc_vt_stk dgram 660 radio system
+    socket soc_vt_svc dgram 660 radio system
+    user root
+    group camera graphics media sdcard_rw radio sdcard_r media_rw
+    ioprio rt 4
 
 service cmmb /system/bin/cmmbsp
     class main
@@ -1104,13 +1133,11 @@ service cmmb /system/bin/cmmbsp
 service enableswap /system/bin/sh /enableswap.sh
     class late_start
     oneshot
-    seclabel u:r:enableswap:s0
 
 service swapoff_action /system/bin/sh /disableswap.sh
     class main
     disabled
     oneshot
-    seclabel u:r:disableswap:s0
 
 service dbus /system/bin/dbus-daemon --system --nofork
     class main
@@ -1126,6 +1153,15 @@ service bluetoothd /system/bin/bluetoothd -n
     # let bluetoothd drop uid to bluetooth with the right linux capabilities
     group bluetooth net_bt_admin misc
     disabled
+
+service mtkbt /system/bin/mtkbt
+    class late_start
+	socket bt.int.adp dgram 660 bluetooth net_bt
+	socket bt.a2dp.stream dgram 660 bluetooth net_bt
+	user bluetooth
+	group system vpn net_admin inet net_raw net_bt bluetooth net_bt_admin net_bt_stack sdcard_r
+	oneshot
+
 
 #service dpfd /system/bin/dpfd
 #	user root
@@ -1195,8 +1231,8 @@ service extmdlogger /system/bin/extmdlogger
 
 service GoogleOtaAgent /system/bin/GoogleOtaBinder
     class main
-    user root
-    group root
+    user system
+    group system
 
 service mdlogger /system/bin/mdlogger
     class main
@@ -1240,11 +1276,6 @@ service emdlogger6 /system/bin/emdlogger6
     disabled
     oneshot
 
-service md_monitor /system/bin/md_monitor
-    class main
-    user system
-    group system radio sdcard_rw inet sdcard_r media_rw
-
 #
 #sensor service (begin)
 #
@@ -1286,13 +1317,12 @@ service akmd8963 /system/bin/akmd8963
     user system
     group system
     class main
-#gionee lizhi modify for msensor begin
+
 service akmd09911 /system/bin/akmd09911
-# disabled
+    disabled
     user system
     group system
     class main
-#gionee lizhi modify for msensor end
 service bmm050d /system/bin/bmm050d
     disabled
     user system
@@ -1361,12 +1391,11 @@ on property:ro.build.type=userdebug
 service emsvr_user /system/bin/em_svr
     disabled
     user system
-    group system radio diag net_bt_stack
+    group system radio diag
 
 service emsvr /system/bin/em_svr
     disabled
     user root
-    group net_bt_stack
 
 #
 #emsvr service (end)
@@ -1405,7 +1434,7 @@ service fuelgauged /system/bin/fuelgauged
 service sn /system/bin/sn
     class late_start
     user system
-    group system sdcard_rw
+    group system sdcard_r
     oneshot
 
 #add for power-off alarm
@@ -1533,6 +1562,12 @@ service zpppd_gprs /system/bin/init.gprs-pppd
 # add the service for call pppd(end)
 #
 
+service sbchk /system/bin/sbchk
+    class core
+    user system
+    group system
+    oneshot
+
 # Program binary service
 service program_binary /system/bin/program_binary_service
     class late_start
@@ -1549,9 +1584,3 @@ service vtservice /system/bin/vtservice
     user system
     group system camera graphics inet net_admin net_raw media sdcard_rw radio sdcard_r media_rw
     ioprio rt 4
-#gionee lizhi add for psensor calibration begin
-    service NvRAMBackupAgent /system/bin/nvram_backup_binder
-    class main
-    user system
-    group system
-#gionee lizhi add for psensor calibration end
