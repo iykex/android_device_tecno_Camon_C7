@@ -1,6 +1,5 @@
 # OTA assert
-TARGET_OTA_ASSERT_DEVICE := Camon_C7,TECNO,Camon_C7,Camon_C7
-
+TARGET_OTA_ASSERT_DEVICE := Camon_C7,tecno,TECNO
 # Bionic
 
 # Enable Minikin text layout engine (will be the default soon)

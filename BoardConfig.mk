@@ -45,13 +45,3 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # System.prop
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
-
-# Block based ota
-# see http://review.cyanogenmod.org/#/c/78849/1/core/Makefile
-BLOCK_BASED_OTA := false
-
-# DISABLED BUILD NINJA
-#USE_NINJA := false
-
-# KERNEL OBJ
-$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)

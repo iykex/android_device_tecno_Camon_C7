@@ -36,7 +36,7 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 1. Download both device tree and vendor tree and extract them to device/tecno/Camon_C7 and vendor/tecno/Camon_C7 respectivly.
   or cd to your working directory. To do that, simply create a local_manifest.xml to ```sourcedir/.repo/local_manifests```
   Note that , by default ``local_manifest``` directory is not available to you must create it yourself.
-  so : 
+  so :
   ```
      $ cd .repo && mkdir local_manifests
      $ cd local_manifests
@@ -53,9 +53,9 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
   </manifest>
   ```
   as you use ```ctrl+x``` to save.
-   | now back to sourcedir, then use : ```repo sync --force-sync``` to resync 
- 
- 
+   | now back to sourcedir, then use : ```repo sync --force-sync``` to resync
+
+
   # OR
 
 
@@ -63,7 +63,7 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7
 ```
 ```
-git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7 
+git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7
 ```
 
 # TO START BUILD :::
@@ -88,9 +88,9 @@ git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b mast
   ```
   _mka bacon -j5_     [ this for AOSP ]
   ```
-   # OR 
-      
-  ```   
+   # OR
+
+  ```
    _brunch Camon_C7_    [ this for LOS ]
   ```
 

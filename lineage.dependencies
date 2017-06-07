@@ -2,7 +2,7 @@
   {
     "remote": "github",
     "repository": "iykequame/android_vendor_tecno_Camon_C7",
-    "target_path": "vendor/ltecno/Camon_C7",
+    "target_path": "vendor/tecno/Camon_C7",
     "branch": "master"
   }
-] 
+]

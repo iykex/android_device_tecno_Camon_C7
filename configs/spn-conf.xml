@@ -527,7 +527,7 @@
 <spnOverride numeric="405028" spn="TATA TELE"/>
 <spnOverride numeric="405029" spn="TATA TELE"/>
 <spnOverride numeric="405030" spn="TATA TELE"/>
-<spnOverride numeric="405031" spn="TATA DOCOMO"/>
+<spnOverride numeric="405031" spn="TATA TELE"/>
 <spnOverride numeric="405032" spn="TATA TELE"/>
 <spnOverride numeric="405033" spn="TATA TELE"/>
 <spnOverride numeric="405034" spn="TATA TELE"/>
@@ -650,9 +650,6 @@
 <spnOverride numeric="42899" spn="MN MobiCom"/>
 <spnOverride numeric="42801" spn="Skytel MN"/>
 <spnOverride numeric="42888" spn="MONGOLIA UNITEL LLC"/>
-<!-- Gionee:chenbo 2015-03-13 add for CR01453747 begin -->
-<spnOverride numeric="42901" spn="NTC"/>
-<!-- Gionee:chenbo 2015-03-13 add for CR01453747 end -->
 <spnOverride numeric="42902" spn="Ncell"/>
 <spnOverride numeric="43235" spn="MTN Irancell"/>
 <spnOverride numeric="43214" spn="IR KISH"/>
