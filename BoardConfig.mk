@@ -55,3 +55,5 @@ BLOCK_BASED_OTA := false
 
 # KERNEL OBJ
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
+
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/BOOT/BOOT/boot/boot_mode
