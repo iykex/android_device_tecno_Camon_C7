@@ -45,7 +45,7 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
   then copy to paste this in the nano page :
  ```xml
  <?xml version="1.0" encoding="UTF-8"?>
-     <manifest>
+ <manifest>
          <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="master"/>
 
          <project path="vendor/tecno/Camon_C7" name="iykequame/android_vendor_tecno_Camon_C7" remote="github" revision="master"/>
