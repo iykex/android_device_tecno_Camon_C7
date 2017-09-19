@@ -74,12 +74,6 @@ git clone https://github.com/Oreo2mt6735/oreo_vendor_mt67xx.git -b n-7.1.2 vendo
 # TO START BUILD :::
 
 
-# you have to/must patch your MTK to meet boot up requirements :)
-```
-./device/tecno/Camon_C7/patches/install.sh
-```
-
-
  2. $ ```. build/envsetup.sh```
  3. $ ```lunch aosp_Camon_C7-userdebug```]
 
