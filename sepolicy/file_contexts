@@ -1,7 +1,0 @@
-# smartwake
-/sys/devices/virtual/touchscreen/touchscreen_dev/smartwake          	u:object_r:smartwake_sysfs:s0
-/sys/devices/virtual/touchscreen/touchscreen_dev/gesture_wakeup   	u:object_r:smartwake_sysfs:s0
-
-# camera
-/dev/T2_CAM_CAL_DRV(/.*)? 						u:object_r:camera_device:s0
-
