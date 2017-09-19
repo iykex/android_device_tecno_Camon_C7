@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_Camon_C7.mk
+    $(LOCAL_DIR)/aosp_Camon_C7.mk
