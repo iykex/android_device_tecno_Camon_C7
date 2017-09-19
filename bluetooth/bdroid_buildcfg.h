@@ -1,6 +1,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Camon_C7"
+#define BTM_DEF_LOCAL_NAME   "TECNO-C7"
 
 #endif

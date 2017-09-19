@@ -7,7 +7,7 @@ By : Nana Iyke Quame
 
 The tecno Camon C7 (codenamed _"Camon_C7"_) is a flagship smartphone from tecno.
 
-This LineageOS 14.1 Device tree for TECNO CAMON C7
+This AospExtended Device tree for TECNO CAMON C7
 
 For more information about building read "manual"
 
@@ -26,7 +26,7 @@ Camera Features | LED Flash[front+back], Autofocus
 
 
 
-This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AOSP based roms) ROM.
+This branch is device for building of AospExtended (or Android Nougat 7.1.x AOSP based roms) ROM.
 
 
 # tecno_Camon_C7_device_tree
@@ -46,24 +46,29 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
  ```xml
  <?xml version="1.0" encoding="UTF-8"?>
  <manifest>
-         <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="master"/>
+         <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="AEX"/>
 
          <project path="vendor/tecno/Camon_C7" name="iykequame/android_vendor_tecno_Camon_C7" remote="github" revision="master"/>
+         
+         <project path="vendor/mt67xx" name="Oreo2mt6735/oreo_vendor_mt67xx" remote="github" revision="n-7.1.2 "/>
 
  </manifest>
   ```
   as you use ```ctrl+x``` to save.
-   | now back to sourcedir, then use : ```repo sync --force-sync``` to resync
+   | now back to sourcedir, then use : ```repo sync -c -jx --force-sync --no-clone-bundle --no-tags``` to resync
 
 
   # OR
 
 
 ```
-git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7
+git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b AEX  device/tecno/Camon_C7
 ```
 ```
 git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7
+```
+```
+git clone https://github.com/Oreo2mt6735/oreo_vendor_mt67xx.git -b n-7.1.2 vendor/mt67xx
 ```
 
 # TO START BUILD :::
@@ -76,24 +81,17 @@ git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b mast
 
 
  2. $ ```. build/envsetup.sh```
- 3. $ ```lunch```
-  and select your device from menu [select ```lineage_Camon_C7-userdebug```]
+ 3. $ ```lunch aosp_Camon_C7-userdebug```]
 
- 4. mka bacon -jn [for AOSP Based] / brunch Camon_C7 [for Lineage Based]
-  example if you have 4 cpu then n=5
-  means n= no of CPU/Core + 1
+ 4. mka aex -jx
+  example if you have 4 cpu then x=5
+  means x= no of CPU/Core + 1
 
   adjust -j value if you are working on your machine same time
   # Example :
   ```
-  _mka bacon -j5_     [ this for AOSP ]
+  mka aex -j5 
   ```
-   # OR
-
-  ```
-   _brunch Camon_C7_    [ this for LOS ]
-  ```
-
  5.  It will take time to compile your build
  6. Find your build in $out directory
  7. Enjoy
