@@ -75,7 +75,7 @@ git clone https://github.com/Oreo2mt6735/oreo_vendor_mt67xx.git -b n-7.1.2 vendo
 
 
  2. $ ```. build/envsetup.sh```
- 3. $ ```lunch aosp_Camon_C7-userdebug```]
+ 3. $ ```lunch aosp_Camon_C7-userdebug```
 
  4. mka aex -jx
   example if you have 4 cpu then x=5
