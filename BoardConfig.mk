@@ -143,3 +143,6 @@ BOARD_USES_MTK_HARDWARE:=true
 
 #Disable libaudiopolicyservice_intermediates
 USE_CUSTOM_AUDIO_POLICY := 0
+
+BOARD_USES_MTK_AUDIO := true
+USE_XML_AUDIO_POLICY_CONF := 1
