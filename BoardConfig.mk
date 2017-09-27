@@ -140,3 +140,6 @@ TARGET_LDPRELOAD += libxlog.so:libmtk_symbols.so # for symbols in mtkaudio.cpp +
 
 # Mediatek support
 BOARD_USES_MTK_HARDWARE:=true
+
+#Disable libaudiopolicyservice_intermediates
+USE_CUSTOM_AUDIO_POLICY := 0
