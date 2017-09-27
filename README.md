@@ -46,7 +46,7 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
  ```xml
  <?xml version="1.0" encoding="UTF-8"?>
  <manifest>
-         <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="master"/>
+         <project path="device/tecno/Camon_C7" name="iykequame/android_device_tecno_Camon_C7" remote="github" revision="los-14.1"/>
 
          <project path="vendor/tecno/Camon_C7" name="iykequame/android_vendor_tecno_Camon_C7" remote="github" revision="master"/>
 
@@ -60,7 +60,7 @@ This branch is device for building of LineageOS 14.1 (or Android Nougat 7.1.x AO
 
 
 ```
-git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b master  device/tecno/Camon_C7
+git clone https://github.com/iykequame/android_device_tecno_Camon_C7.git -b los-14.1  device/tecno/Camon_C7
 ```
 ```
 git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b master vendor/tecno/Camon_C7
