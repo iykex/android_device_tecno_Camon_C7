@@ -1,0 +1,7 @@
+allow surfaceflinger pq_service:service_manager find;
+
+allow surfaceflinger debug_prop:property_service set;
+
+allow surfaceflinger em_svr:dir search;
+allow surfaceflinger em_svr:file { read getattr open };
+

@@ -1,0 +1,12 @@
+PQ  u:object_r:pq_service:s0
+
+#com.wrg.JellyService                      u:object_r:dtv_service:s0
+#data_shaping        u:object_r:mtk_data_shaping_service:s0
+#multiwindow     u:object_r:mtk_multiwindow_service:s0
+#mw_blacklist   u:object_r:mtk_mwblacklist_service:s0
+#goodix.fp                                 u:object_r:gx_fpd_service:s0
+media.fp         u:object_r:fpserver_service:s0
+#fingerManager         u:object_r:system_server_service:s0
+fingerManager         u:object_r:fpserver_service:s0
+
+media.mmsdk         u:object_r:cameraserver_service:s0
