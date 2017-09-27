@@ -71,8 +71,15 @@ git clone https://github.com/iykequame/android_vendor_tecno_Camon_C7.git -b mast
 
 # you have to/must patch your MTK to meet boot up requirements :)
 ```
-./device/tecno/Camon_C7/patches/install.sh
+./device/tecno/Camon_C7/patches/apply.sh
+
+./device/tecno/Camon_C7/patches/check.sh
+
+ONLY WHEN NEEDED
+
+./device/tecno/Camon_C7/patches/rm-rf.sh
 ```
+
 
 
  2. $ ```. build/envsetup.sh```
