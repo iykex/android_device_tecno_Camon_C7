@@ -1,3 +1,0 @@
-unix_socket_connect(radio, rild, ril-daemon-mtk)
-
-allow radio em_svr:unix_stream_socket connectto;

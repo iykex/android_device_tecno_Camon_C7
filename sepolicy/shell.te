@@ -1,2 +1,0 @@
-allow shell sunwave_device:chr_file {open read write ioctl};
-allow shell em_svr_exec:file rx_file_perms;
