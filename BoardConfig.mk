@@ -210,4 +210,4 @@ MTK_GPU_VERSION := mali midgard r7p0
 # Hack for build
 $(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
 
-USE_NINJA := false
+#USE_NINJA := false
