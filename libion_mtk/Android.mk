@@ -22,7 +22,7 @@ LOCAL_MODULE := libion_mtk
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_C_INCLUDES += \
-	device/zte/a610/libion_mtk/include \
+	device/tecno/Camon_C7/libion_mtk/include \
 	system/core/include
 
 LOCAL_SHARED_LIBRARIES := libion liblog libdl
