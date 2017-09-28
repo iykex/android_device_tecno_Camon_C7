@@ -51,14 +51,15 @@
  * limitations under the License.
  */
 
-#ifndef _MTK_HARDWARE_MTKCAM_INCLUDE_MTKCAM_UTILS_FWK_MTKCAMERAPARAMETERS_H
-#define _MTK_HARDWARE_MTKCAM_INCLUDE_MTKCAM_UTILS_FWK_MTKCAMERAPARAMETERS_H
+#ifndef ANDROID_HARDWARE_MTK_CAMERA_PARAMETERS_H
+#define ANDROID_HARDWARE_MTK_CAMERA_PARAMETERS_H
 
 #include <camera/CameraParameters.h>
 
 namespace android {
 
-/**
+
+/**  
  * @class      MtkCameraParameters
  * @brief      MTK-proprietary camera parameters.
  * @details    This class is derived from CameraParameters and defines MTK-proprietary camera parameters.
@@ -75,27 +76,7 @@ public:
         unflatten(params.flatten());
         return  (*this);
     }
-
-    void setPreviewSize(int width, int height);
-    void getPreviewSize(int *width, int *height) const;
     //
-    /**************************************************************************
-     * @brief Query the image format constant.
-     *
-     * @details Given a MtkCameraParameters::PIXEL_FORMAT_xxx, return its
-     * corresponding image format constant.
-     *
-     * @note
-     *
-     * @param[in] szPixelFormat: A null-terminated string for pixel format (i.e.
-     * MtkCameraParameters::PIXEL_FORMAT_xxx)
-     *
-     * @return its corresponding image format.
-     *
-     **************************************************************************/
-    static int queryImageFormat(String8 const& s8PixelFormat);
-    static int queryImageFormat(char const* szPixelFormat);
-
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //  App Mode.
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -104,7 +85,7 @@ public:
     static const char APP_MODE_NAME_DEFAULT[];
     static const char APP_MODE_NAME_MTK_ENG[];
     static const char APP_MODE_NAME_MTK_ATV[];
-    static const char APP_MODE_NAME_MTK_STEREO[];
+    static const char APP_MODE_NAME_MTK_S3D[];
     static const char APP_MODE_NAME_MTK_VT[];
     static const char APP_MODE_NAME_MTK_PHOTO[];
     static const char APP_MODE_NAME_MTK_VIDEO[];
@@ -121,12 +102,10 @@ public:
     static const char KEY_FB_SMOOTH_LEVEL[];
     static const char KEY_FB_SMOOTH_LEVEL_MIN[];
     static const char KEY_FB_SMOOTH_LEVEL_MAX[];
-    static const char KEY_FB_SMOOTH_LEVEL_Default[];
     //
     static const char KEY_FB_SKIN_COLOR[];
     static const char KEY_FB_SKIN_COLOR_MIN[];
     static const char KEY_FB_SKIN_COLOR_MAX[];
-    static const char KEY_FB_SKIN_COLOR_Default[];
     //
     static const char KEY_FB_SHARP[];
     static const char KEY_FB_SHARP_MIN[];
@@ -142,20 +121,10 @@ public:
     //
     static const char KEY_FB_EXTREME_BEAUTY[];
     //
-    static const char KEY_FB_TOUCH_POS[];
-    //
-    static const char KEY_FB_FACE_POS[];
-    //
     static const char KEY_FACE_BEAUTY[];
     //
-    static const char KEY_FB_EXTREME_SUPPORTED[];
-    //
-    static const char KEY_FEATURE_MAX_FPS[];
-    //
-    static const char KEY_VIDEO_FACE_BEAUTY_SUPPORTED[];
-    //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//
+//  
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     static const char KEY_EXPOSURE[];
     static const char KEY_EXPOSURE_METER[];
@@ -167,16 +136,16 @@ public:
     static const char KEY_SATURATION[];
     static const char KEY_BRIGHTNESS[];
     static const char KEY_CONTRAST[];
-    static const char KEY_ZSD_MODE[];
+    static const char KEY_ZSD_MODE[];	
     static const char KEY_SUPPORTED_ZSD_MODE[];
-    static const char KEY_AWB2PASS[];
+    static const char KEY_AWB2PASS[];	
     static const char KEY_AF_LAMP_MODE [];
 
     static const char KEY_STEREO_3D_PREVIEW_SIZE[];
-    static const char KEY_STEREO_3D_PICTURE_SIZE[];
-    static const char KEY_STEREO_3D_TYPE [];
+    static const char KEY_STEREO_3D_PICTURE_SIZE[];    
+    static const char KEY_STEREO_3D_TYPE [];		
     static const char KEY_STEREO_3D_MODE [];
-    static const char KEY_STEREO_3D_IMAGE_FORMAT [];
+    static const char KEY_STEREO_3D_IMAGE_FORMAT [];	
     //
     static const char KEY_FPS_MODE[];       // normal,fix
     //
@@ -194,7 +163,7 @@ public:
     //
     static const char KEY_SENSOR_DEV[];    // main,sub,atv
     static const char KEY_SUPPORTED_SENSOR_DEVS[];
-
+	
     // Values for KEY_EXPOSURE
     static const char EXPOSURE_METER_SPOT[];
     static const char EXPOSURE_METER_CENTER[];
@@ -230,15 +199,15 @@ public:
     static const char CAPTURE_MODE_BEST_SHOT[];
     static const char CAPTURE_MODE_EV_BRACKET_SHOT[];
     static const char CAPTURE_MODE_SMILE_SHOT[];
-    static const char CAPTURE_MODE_AUTO_PANORAMA_SHOT[];
-    static const char CAPTURE_MODE_MOTION_TRACK_SHOT[];
-    static const char CAPTURE_MODE_MAV_SHOT[];
-    static const char CAPTURE_MODE_HDR_SHOT[];
+    static const char CAPTURE_MODE_AUTO_PANORAMA_SHOT[]; 
+    static const char CAPTURE_MODE_MOTION_TRACK_SHOT[]; 
+    static const char CAPTURE_MODE_MAV_SHOT[]; 
+    static const char CAPTURE_MODE_HDR_SHOT[]; 
     static const char CAPTURE_MODE_ASD_SHOT[];
     static const char CAPTURE_MODE_ZSD_SHOT[];
-    static const char CAPTURE_MODE_PANO_3D[];
-    static const char CAPTURE_MODE_SINGLE_3D[];
-    static const char CAPTURE_MODE_FACE_BEAUTY[];
+    static const char CAPTURE_MODE_PANO_3D[]; 
+    static const char CAPTURE_MODE_SINGLE_3D[]; 
+    static const char CAPTURE_MODE_FACE_BEAUTY[]; 	
     static const char CAPTURE_MODE_CONTINUOUS_SHOT[];
     static const char CAPTURE_MODE_MULTI_MOTION[];
     static const char CAPTURE_MODE_GESTURE_SHOT[];
@@ -292,27 +261,26 @@ public:
      *      y stride     = 192x144
      *      cr stride    = 96x72
      *      cb stride    = 96x72
-     *
+     *   
      */
     static const char PIXEL_FORMAT_YV12_GPU[];
 
     /*
      *  YUV422 format, 1 plane (UYVY)
      *
-     *  Effective bits per pixel : 16
+     *  Effective bits per pixel : 16 
      *
-     *  Y sample at every pixel, U and V sampled at every second pixel horizontally on each line.
+     *  Y sample at every pixel, U and V sampled at every second pixel horizontally on each line. 
      *  A macropixel contains 2 pixels in 1 uint32_t.
      *
      */
-    static const char PIXEL_FORMAT_YUV422I_UYVY[];
+    static const char PIXEL_FORMAT_YUV422I_UYVY[];   
     //
     static const char PIXEL_FORMAT_YUV422I_VYUY[];
     static const char PIXEL_FORMAT_YUV422I_YVYU[];
-    static const char PIXEL_FORMAT_BAYER8[];
-    static const char PIXEL_FORMAT_BAYER10[];
-    static const char PIXEL_FORMAT_BITSTREAM[];
-    static const char PIXEL_FORMAT_YUV420SP_NV12[];
+    static const char PIXEL_FORMAT_BAYER8[]; 
+    static const char PIXEL_FORMAT_BAYER10[];    
+
     /**
      * @var KEY_BRIGHTNESS_VALUE
      *
@@ -321,11 +289,11 @@ public:
      */
     static const char KEY_BRIGHTNESS_VALUE[];
 
-    // ISP Operation mode for meta mode use
+    // ISP Operation mode for meta mode use 
     static const char KEY_ISP_MODE[];
-    // AF
-    static const char KEY_AF_X[];
-    static const char KEY_AF_Y[];
+    // AF 
+    static const char KEY_AF_X[]; 
+    static const char KEY_AF_Y[]; 
     static const char KEY_FOCUS_ENG_MAX_STEP[];
     static const char KEY_FOCUS_ENG_MIN_STEP[];
     static const char KEY_FOCUS_ENG_BEST_STEP[];
@@ -334,9 +302,9 @@ public:
     static const int  PREVIEW_DUMP_RESOLUTION_NORMAL;
     static const int  PREVIEW_DUMP_RESOLUTION_CROP;
 
-    // Values for effect
+    // Values for effect 
     static const char EFFECT_SEPIA_BLUE[];
-    static const char EFFECT_SEPIA_GREEN[];
+    static const char EFFECT_SEPIA_GREEN[];    
     static const char  EFFECT_NASHVILLE[];
     static const char  EFFECT_HEFE[];
     static const char  EFFECT_VALENCIA[];
@@ -346,86 +314,23 @@ public:
     static const char  EFFECT_KELVIN[];
     static const char  EFFECT_WALDEN[];;
     static const char  EFFECT_F1977[];
-    // Values for AWB
+    // Values for AWB 
     static const char WHITE_BALANCE_TUNGSTEN[];
     // Eng
     static const char ISO_SPEED_ENG[];
     static const char KEY_FOCUS_ENG_MODE[]; // 0,1,2,3 (0: normal)
-    static const char KEY_FOCUS_ENG_STEP[];
+    static const char KEY_FOCUS_ENG_STEP[];	
     static const char KEY_RAW_SAVE_MODE[];  // on, off
-    static const char KEY_RAW_PATH[];
+    static const char KEY_RAW_PATH[];	
 
-    // KEY for Continuous shot speed
+	// KEY for Continuous shot speed
     static const char KEY_FAST_CONTINUOUS_SHOT[];
 
-    // KEY for Video HDR
     static const char KEY_VIDEO_HDR[];
-    static const char KEY_VIDEO_HDR_MODE[];
-    static const char VIDEO_HDR_MODE_IVHDR[];
-    static const char VIDEO_HDR_MODE_MVHDR[];
-    static const char VIDEO_HDR_MODE_ZVHDR[];
-    static const char VIDEO_HDR_SIZE_DEVISOR[];
-    // indicate that if single-frame capture HDR is supported
-    // Example value: "true" or "false". Read only.
-    static const char KEY_SINGLE_FRAME_CAPTURE_HDR_SUPPORTED[];
-
-    // MZAF from config table
-    static const char KEY_SUPPORT_MZAF_FEATURE[];
-
-    // indicate that if HDR detection is supported
-    // Example value: "true" or "false". Read only.
-    static const char KEY_HDR_DETECTION_SUPPORTED[];
-
-    // indicated by Camera APP that if HDR mode is auto or not
-    // Example value: "on" or "off". Read only.
-    static const char KEY_HDR_AUTO_MODE[];
-
-    // TODO: use this mode to replace KEY_HDR_AUTO_MODE and KEY_VIDEO_HDR
-    // KEY for HDR mode
-    static const char KEY_HDR_MODE[];
-
-    // Values for hdr mode settings.
-    //
-    // - disable high dynamic range imaging techniques
-    //
-    //   logically equivalent to
-    //   scene-mode ??SCENE_MODE_HDR
-    static const char HDR_MODE_OFF[];
-    // - capture a scene using high dynamic range imaging techniques
-    //
-    //   logically equivalent to
-    //   scene-mode = SCENE_MODE_HDR
-    static const char HDR_MODE_ON[];
-    // - capture a scene using high dynamic range imaging techniques
-    // - supports HDR scene detection
-    //
-    //   logically equivalent to
-    //   scene-mode = SCENE_MODE_HDR
-    //   hdr-auto-mode = on
-    static const char HDR_MODE_AUTO[];
-    // - capture/preview/record a scene using high dynamic range imaging techniques
-    //
-    //   logically equivalent to
-    //   scene-mode = SCENE_MODE_HDR
-    //   hdr-auto-mode = off
-    //   video-hdr = on
-    static const char HDR_MODE_VIDEO_ON[];
-    // - capture/preview/record a scene using high dynamic range imaging techniques
-    // - supports HDR scene detection
-    //
-    //   logically equivalent to
-    //   scene-mode = SCENE_MODE_HDR
-    //   hdr-auto-mode = on
-    //   video-hdr = on
-    static const char HDR_MODE_VIDEO_AUTO[];
 
     static const char KEY_MAX_NUM_DETECTED_OBJECT[];
 
-    // HRD
-    static const char KEY_HEARTBEAT_MONITOR[];
-    static const char KEY_HEARTBEAT_MONITOR_SUPPORTED[];
-
-    // KEY for c_shot indicator
+    // KEY for c_shot indicator 
     static const char KEY_CSHOT_INDICATOR[];
 
     // KEY for [Engineer Mode] Add new camera paramters for new requirements
@@ -434,7 +339,6 @@ public:
     static const char KEY_ENG_PREVIEW_SENSOR_GAIN[];
     static const char KEY_ENG_PREVIEW_ISP_GAIN[];
     static const char KEY_ENG_PREVIEW_AE_INDEX[];
-    static const char KEY_ENG_PREVIEW_ISO[];
     static const char KEY_ENG_CAPTURE_SENSOR_GAIN[];
     static const char KEY_ENG_CAPTURE_ISP_GAIN[];
     static const char KEY_ENG_CAPTURE_SHUTTER_SPEED[];
@@ -455,27 +359,10 @@ public:
     static const char KEY_ENG_FOCUS_FULLSCAN_FRAME_INTERVAL_MIN[];
     static const int  KEY_ENG_FOCUS_FULLSCAN_FRAME_INTERVAL_MAX_DEFAULT;
     static const int  KEY_ENG_FOCUS_FULLSCAN_FRAME_INTERVAL_MIN_DEFAULT;
-    static const char KEY_ENG_FOCUS_FULLSCAN_DAC_STEP[];
     static const char KEY_ENG_PREVIEW_FRAME_INTERVAL_IN_US[];
     static const char KEY_ENG_PARAMETER1[];
     static const char KEY_ENG_PARAMETER2[];
     static const char KEY_ENG_PARAMETER3[];
-
-    //ENG KEY for RAW output port
-    static const char KEY_ENG_RAW_OUTPUT_PORT[];
-    static const int  KEY_ENG_RAW_IMGO;
-    static const int  KEY_ENG_RAW_RRZO;
-
-    //ENG KEY for ISP PROFILE
-    static const char KEY_ENG_ISP_PROFILE[];
-    static const int  KEY_ENG_ISP_PREVIEW;
-    static const int  KEY_ENG_ISP_CAPTURE;
-    static const int  KEY_ENG_ISP_VIDEO;
-
-    static const char KEY_ENG_EV_VALUE[];
-    static const char KEY_ENG_EVB_ENABLE[];
-
-    static const char KEY_ENG_3ADB_FLASH_ENABLE[];
 
     static const char KEY_ENG_SAVE_SHADING_TABLE[];
     static const char KEY_ENG_SHADING_TABLE[];
@@ -484,8 +371,6 @@ public:
     static const int KEY_ENG_SHADING_TABLE_MIDDLE;
     static const int KEY_ENG_SHADING_TABLE_HIGH;
     static const int KEY_ENG_SHADING_TABLE_TSF;
-
-    static const char KEY_VR_BUFFER_COUNT[];
 
     // KEY for [Engineer Mode] Add new camera paramters for ev calibration
     static const char KEY_ENG_EV_CALBRATION_OFFSET_VALUE[];
@@ -509,137 +394,19 @@ public:
     static const char KEY_ENG_VIDEO_RAW_DUMP_MANUAL_FRAME_RATE_MAX[];
     static const char KEY_ENG_VIDEO_RAW_DUMP_MANUAL_FRAME_RATE_RANGE_LOW[];
     static const char KEY_ENG_VIDEO_RAW_DUMP_MANUAL_FRAME_RATE_RANGE_HIGH[];
-    static const char KEY_ENG_VIDEO_RAW_DUMP_RESIZE[];
-    static const char KEY_ENG_VIDEO_RAW_DUMP_SUPPORTED[];
 
-    static const char KEY_ENG_MTK_AWB_SUPPORTED[];
-    static const char KEY_ENG_SENSOR_AWB_SUPPORTED[];
-    static const char KEY_ENG_MTK_AWB_ENABLE[];
-    static const char KEY_ENG_SENSOR_AWB_ENABLE[];
-
-    static const char KEY_ENG_MTK_SHADING_SUPPORTED[];
-    static const char KEY_ENG_MTK_1to3_SHADING_SUPPORTED[];
-    static const char KEY_ENG_SENSOR_SHADNING_SUPPORTED[];
-    static const char KEY_ENG_MTK_SHADING_ENABLE[];
-    static const char KEY_ENG_MTK_1to3_SHADING_ENABLE[];
-    static const char KEY_ENG_SENSOR_SHADNING_ENABLE[];
-
-    static const char KEY_ENG_MANUAL_MULTI_NR_SUPPORTED[];
-    static const char KEY_ENG_MANUAL_MULTI_NR_ENABLE[];
-    static const char KEY_ENG_MANUAL_MULTI_NR_TYPE[];
-    static const char KEY_ENG_VIDEO_HDR_SUPPORTED[];
-    static const char KEY_ENG_VIDEO_HDR_MODE[];
-    static const char KEY_ENG_VIDEO_HDR_RATIO[];
-
-    // Slow Motion
+#ifdef MTK_SLOW_MOTION_VIDEO_SUPPORT
+    // High Speed Video Record
     static const char KEY_HSVR_PRV_SIZE[];
     static const char KEY_SUPPORTED_HSVR_PRV_SIZE[];
     static const char KEY_HSVR_PRV_FPS[];
     static const char KEY_SUPPORTED_HSVR_PRV_FPS[];
-    static const char KEY_HSVR_SIZE_FPS[];
-    static const char KEY_SUPPORTED_HSVR_SIZE_FPS[];
+#endif
 
-    // MFB
-    static const char KEY_MFB_MODE[];
-    static const char KEY_MFB_MODE_MFLL[];
-    static const char KEY_MFB_MODE_AIS[];
-
-    //PIP
-    static const char KEY_PIP_MAX_FRAME_RATE_ZSD_ON[];
-    static const char KEY_PIP_MAX_FRAME_RATE_ZSD_OFF[];
-
-    // Dynamic Frame Rate
-    static const char KEY_DYNAMIC_FRAME_RATE[];
-    static const char KEY_DYNAMIC_FRAME_RATE_SUPPORTED[];
-
-    // Stereo Feature
-    static const char KEY_STEREO_REFOCUS_MODE[];
-    static const char KEY_STEREO_CAPTURE_MODE[];
-    static const char KEY_STEREO_DEPTHAF_MODE[];
-    static const char KEY_STEREO_DISTANCE_MODE[];
-    static const char KEY_STEREO_PICTURE_SIZE[];
-    static const char KEY_SUPPORTED_STEREO_PICTURE_SIZE[];
-    static const char KEY_REFOCUS_PICTURE_SIZE[];
-    static const char KEY_SUPPORTED_REFOCUS_PICTURE_SIZE[];
-    static const char KEY_STEREO_PREVIEW_FRAME_RATE[];
-    static const char KEY_STEREO_CAPTURE_FRAME_RATE[];
-    static const char KEY_STEREO_SENSOR_INDEX_MAIN[];
-    static const char KEY_STEREO_SENSOR_INDEX_MAIN2[];
-    static const char KEY_STEREO_CAPTURE_SUPPORTED_MODULE[];
-    // Stereo Feature: VSDoF
-    static const char KEY_STEREO_VSDOF_MODE[];
-    static const char KEY_STEREO_DOF_LEVEL[];
-    static const char KEY_STEREO_SUPPORTED_DOF_LEVEL[];
-    static const char KEY_STEREO_RESULT_DOF_LEVEL[];
-    static const char KEY_STEREO_VSDOF_SUPPORTED_MODULE[];
-    static const char KEY_STEREO_TOUCH_POSITION[];
-    // Stereo Feature: De-noise
-    static const char KEY_STEREO_DENOISE_MODE[];
-    static const char KEY_STEREO_DENOISE_SUPPORTED_MODULE[];
-    // Stereo Feature: 3rd-Party
-    static const char KEY_STEREO_3RDPARTY_MODE[];
-    static const char KEY_STEREO_3RDPARTY_SUPPORTED_MODULE[];
-    // Stereo Feature: DualCam P2 control
-    static const char KEY_STEREO_PREVIEW_ENABLE[];
-
-    // Dual cam feature: capture
-    static const char KEY_DUALCAM_CAPTURE_MODE[];
-
-    // Image refocus
-    static const char KEY_REFOCUS_JPS_FILE_NAME[];
-
-    // 3DNR
-    static const char KEY_3DNR_MODE[];
-    static const char KEY_3DNR_QUALITY_SUPPORTED[];
-
-    static const char KEY_EIS_SUPPORTED_FRAMES[];
-    static const char KEY_EIS25_MODE[];
-
-    // for manual exposure time / sensor gain
-    static const char KEY_ENG_MANUAL_SHUTTER_SPEED [];
-    static const char KEY_ENG_MANUAL_SENSOR_GAIN[];
-
-    // Flash Calibration
-    static const char KEY_ENG_FLASH_CALIBRATION[];
-
-    // for sensor mode
-    static const char KEY_ENG_SENOSR_MODE_SUPPORTED[];
-
-    // Gesture Shot
-    static const char KEY_GESTURE_SHOT[];
-    static const char KEY_GESTURE_SHOT_SUPPORTED[];
-
-    // Native PIP
-    static const char KEY_NATIVE_PIP[];
-    static const char KEY_NATIVE_PIP_SUPPORTED[];
-
-    // PDAF
-    static const char KEY_PDAF[];
-    static const char KEY_PDAF_SUPPORTED[];
-
-    // first display frame black
-    static const char KEY_FIRST_PREVIEW_FRAME_BLACK[];
-
-    //DNG
-    static const char KEY_DNG_SUPPORTED[];
-
-    // Display Rotation
-    static const char KEY_DISPLAY_ROTATION_SUPPORTED[];
-    static const char KEY_PANEL_SIZE[];
-
-    //multi-zone AF window
-    static const char KEY_IS_SUPPORT_MZAF[];
-    static const char KEY_MZAF_ENABLE[];
-
-    // post-view
-    static const char KEY_POST_VIEW_FMT[];
-
+	//
 public:     ////    on/off => FIXME: should be replaced with TRUE[]
     static const char ON[];
     static const char OFF[];
-
-    static const char REAR[];
-    static const char FRONT[];
 };
 
 }; // namespace android
