@@ -11,6 +11,9 @@ git apply -v ../../device/tecno/Camon_C7/patches_mtk/system_sepolicy.patch
 cd ../..
 cd frameworks/av
 git apply -v ../../device/tecno/Camon_C7/patches_mtk/frameworks_av.patch
+# AudioSystem.patch >> start
+git apply -v ../../device/tecno/Camon_C7/patches_mtk/AudioSystem.patch
+# << end
 cd ..
 cd native
 git apply -v ../../device/tecno/Camon_C7/patches_mtk/frameworks_native.patch
