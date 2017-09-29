@@ -278,7 +278,12 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap
+    Snap \
+    libcamera_parameters_ext
+
+# Camera Legacy
+PRODUCT_PACKAGES += \
+    fs_config_files
 
 # Browser
 PRODUCT_PACKAGES += \
